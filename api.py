@@ -1,24 +1,25 @@
-from flask import Flask
-import pandas as pd
-import numpy as np
+from flask import Flask, jsonify
+from flask_cors import CORS
 import yfinance as yf
-import json 
 
 
+# configuration
+DEBUG = True
+
+# instantiate the app
 app = Flask(__name__)
+app.config.from_object(__name__)
 
-@app.route('/')
-def index():
-    return 'Web App with Python Flask nic! hfsajhfjd'
-
-@app.route('/a/<ticker>')
-def getinfo(ticker):
-    data = yf.Ticker(ticker)
-    return json.dumps(data.info)
+# enable CORS
+CORS(app, resources={r'/*': {'origins': '*'}})
 
 
+# sanity check route
+@app.route('/ping', methods=['GET'])
+def ping_pong():
+    msft = yf.Ticker("AAPL")
+    return jsonify(msft.info)
 
 
-    
-
-app.run(host='0.0.0.0', port=81)
+if __name__ == '__main__':
+    app.run()
