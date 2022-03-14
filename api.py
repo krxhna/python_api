@@ -15,9 +15,9 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 
 # sanity check route
-@app.route('/ping', methods=['GET'])
-def ping_pong():
-    msft = yf.Ticker("AAPL")
+@app.route('/ping/<ticker>', methods=['GET'])
+def ping_pong(ticker):
+    msft = yf.Ticker(ticker)
     return jsonify(msft.info)
 
 
