@@ -1,4 +1,4 @@
 flask
 Gunicorn
-flask_core
+flask_cors
 yfinance
