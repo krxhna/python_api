@@ -1,0 +1,4 @@
+flask
+Gunicorn
+flask_core
+yfinance
