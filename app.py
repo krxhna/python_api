@@ -38,6 +38,23 @@ def get_finance(ticker):
     res = finance_t.iloc[0].to_dict()
     return jsonify(res)
 
+
+@app.route('/balancesheet/<ticker>', methods=['GET'])
+def get_balancesheet(ticker):
+    object = yf.Ticker(ticker)
+    #gwttng the finance thing
+    finance = object.balance_sheet
+    #transposing
+    finance_t = finance.transpose()
+    #repalce nuil
+    finance_t = finance_t.fillna(0).rename(columns=str.lower)
+    #remove space
+    finance_t.columns = finance_t.columns.str.replace(' ','_')
+
+
+    #picking up the first row 
+    res = finance_t.iloc[0].to_dict()
+    return jsonify(res)
     
 
 
