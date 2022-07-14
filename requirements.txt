@@ -2,3 +2,4 @@ flask
 Gunicorn
 flask_cors
 yfinance
+transformers
