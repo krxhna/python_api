@@ -23,8 +23,8 @@ Flask-Cors==3.0.10
 fonttools==4.33.3
 h11==0.13.0
 idna==3.3
-ipykernel==6.15.0
-ipython==8.4.0
+# ipykernel==6.15.0
+# ipython==8.4.0
 itsdangerous==2.1.1
 jedi==0.18.1
 Jinja2==3.0.3
