@@ -4,3 +4,4 @@ flask_cors
 yfinance
 transformers
 pymongo
+cryptography>=3.5

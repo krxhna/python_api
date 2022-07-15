@@ -7,7 +7,7 @@ import yfinance as yf
 
 from pymongo import MongoClient
 import pymongo
-from bson import json_util
+
 
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
 CONNECTION_STRING = "mongodb+srv://krish:greenlines123@cluster1.7qmda.mongodb.net/test"
