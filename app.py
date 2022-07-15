@@ -76,7 +76,15 @@ def get_balancesheet(ticker):
 
     #picking up the first row 
     res = finance_t.iloc[0].to_dict()
-    return jsonify(res)
+    return jsonify(
+                {
+            'symbol': ticker,
+            '2021': finance_t.iloc[0].to_dict(),
+            '2020': finance_t.iloc[1].to_dict(),
+            '2019': finance_t.iloc[2].to_dict(),
+            '2018': finance_t.iloc[3].to_dict()
+        }
+    )
     
 
 
