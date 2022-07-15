@@ -5,6 +5,17 @@ import yfinance as yf
 
 # configuration
 
+from pymongo import MongoClient
+import pymongo
+from bson import json_util
+
+    # Provide the mongodb atlas url to connect python to mongodb using pymongo
+CONNECTION_STRING = "mongodb+srv://krish:greenlines123@cluster1.7qmda.mongodb.net/test"
+
+    # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
+from pymongo import MongoClient
+client = MongoClient(CONNECTION_STRING)
+
 
 # instantiate the app
 app = Flask(__name__)
@@ -17,8 +28,19 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 @app.route('/info/<ticker>', methods=['GET'])
 def info(ticker):
-    msft = yf.Ticker(ticker)
-    return jsonify(msft.info)
+    ticker = ticker.upper()
+    db = client.test
+    collection = db.tickers
+    #checking if it exsits in the database
+    if collection.count_documents({'symbol': ticker}, limit = 1) == 0:
+        res = yf.Ticker(ticker)
+        return jsonify(res.info) 
+    else:
+        data= collection.find_one({'symbol': ticker})
+        data['_id'] = str(data['_id'])
+        data['gmtOffSetMilliseconds'] = str(data['gmtOffSetMilliseconds'])
+        return jsonify(data)
+
 
 
 @app.route('/finance/<ticker>', methods=['GET'])
