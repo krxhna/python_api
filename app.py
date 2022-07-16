@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 import yfinance as yf
-
+from math import isnan
 
 # configuration
 
@@ -40,6 +40,9 @@ def info(ticker):
         data= collection.find_one({'symbol': ticker})
         data['_id'] = str(data['_id'])
         data['gmtOffSetMilliseconds'] = str(data['gmtOffSetMilliseconds'])
+        data['financialCurrency'] = "NAN"
+
+        
         return jsonify(data)
 
 
@@ -130,4 +133,4 @@ def hello():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=80, debug=True,)
