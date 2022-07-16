@@ -14,7 +14,8 @@ CONNECTION_STRING = "mongodb+srv://krish:greenlines123@cluster1.7qmda.mongodb.ne
 
     # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
 from pymongo import MongoClient
-client = MongoClient(CONNECTION_STRING)
+client = MongoClient(CONNECTION_STRING,connect=False)
+#client = MongoClient(connect=False, username='dbadmin', password='somepass', authSource='somedb')
 
 
 # instantiate the app
